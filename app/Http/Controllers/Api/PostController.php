@@ -21,14 +21,15 @@ class PostController extends Controller
         // return response()->json(Post::all());
 
         $posts = Post::with('user')
-            ->where('is_draft', 0)
-            ->where(function ($query) {
-                $query->whereNull('published_at')->orWhere('published_at', '<=', now());
-            })
-            ->latest()
-            ->paginate(20);
+        ->where('is_draft', false)
+        ->where(function ($query) {
+            $query->whereNull('published_at')
+                ->orWhere('published_at', '<=', now());
+        })
+        ->latest()
+        ->paginate(20);
 
-        return response()->json($posts);
+    return response()->json($posts);
     }
 
     /**
