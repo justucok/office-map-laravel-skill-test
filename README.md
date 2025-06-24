@@ -20,48 +20,52 @@ Implement RESTful routes for a Post model using Laravel, with support for drafts
 
 ## 4. Requirements
 
-### 4-1. General
+### 4-1. General ✅
 
 - Implement Laravel best practices.
 - For team development, commit with an appropriate commit size and write suitable commit messages.
 - View file implementations are NOT required. The responses should be JSON or redirects.
 
-### 4-2. `posts.index` route
+### 4-2. `posts.index` route ✅
 
 - Retrieve a paginated list (20 per page) of active posts.
 - Include the user data associated with each post.
 - Drafts or scheduled posts should not be included.
 - Response must be in JSON.
 
-### 4-3. `posts.create` route
+### 4-3. `posts.create` route ✅
 
 - You may skip implementing this route or return the string `posts.create`.
 
-### 4-4. `posts.store` route
+### 4-4. `posts.store` route ✅
 
 - Only authenticated users can create new posts.
 - Validate submitted data before creating the post.
+- ✅ *Implemented using Laravel Form Request for validation.*
 
-### 4-5. `posts.show` route
+### 4-5. `posts.show` route ✅
 
 - Retrieve a single post.
 - Response must be in JSON.
 - Return 404 if the post is draft or scheduled.
 
-### 4-6. `posts.edit` route
+### 4-6. `posts.edit` route ✅
 
 - You may skip implementing this route or return the string `posts.edit`.
 
-### 4-7. `posts.update` route
+### 4-7. `posts.update` route ✅
 
 - Only the post's author can update the post.
 - Validate submitted data before updating the post.
+- ✅ *Access control handled via Laravel Policy.*
 
-### 4-8. `posts.destroy` route
+### 4-8. `posts.destroy` route ✅
 
 - Only the post's author can delete the post.
+- ✅ *Access control handled via Laravel Policy.*
 
-### 4-9. Testing
+### 4-9. Testing ✅
+
 - Write feature (HTTP) tests for all posts routes to verify expected behavior, including both successful and failure scenarios.
 
 ## 5. Hints
@@ -71,17 +75,24 @@ Implement RESTful routes for a Post model using Laravel, with support for drafts
 3. The `posts` table is already defined in the migration file. Refer to its fields to determine how to structure submitted data and how to identify whether a post is active, a draft, or scheduled.
 4. Although these routes behave like an API, you may use Laravel’s built-in cookie-based authentication instead of token-based systems such as Sanctum or Passport.
 
-### Recommended environment
+## 6. Recommended environment
 
 - PHP 8.3
 - Node v22.15.0
 - Database: SQLite
 - Server: Built-in development server
 
+## 7. Additional Notes
+
+- ✅ *Authentication is handled using Laravel's built-in session and cookie-based auth (`web` guard, no Sanctum/Passport used).*
+- ✅ *Post creation and update validations use Form Request classes.*
+- ✅ *Authorization for update and delete actions is enforced using a Laravel Policy.*
+- ✅ *The PostFactory was modified to automatically associate posts with a valid `user_id`.*
+
 ### Database Seeding
 
 Seeders create sample data of User and Post.
 
-```
+```bash
 php artisan db:seed
 ```
