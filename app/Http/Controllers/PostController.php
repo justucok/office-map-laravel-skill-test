@@ -20,7 +20,7 @@ class PostController extends Controller
         // Fetch all posts that are not drafts and have a published date
         $posts = Post::with('user')->where('is_draft', false)->whereNotNull('published_at')->latest()->paginate(20);
 
-        return response()->json(['data' => $posts]);
+        return response()->json([$posts]);
     }
 
     /**
@@ -39,7 +39,7 @@ class PostController extends Controller
             'published_at' => $validated['published_at'] ?? null,
         ]);
 
-        return to_route('posts.show', compact('post'));
+        return to_route('posts.show', compact('post'))->with('success');
     }
 
     /**
